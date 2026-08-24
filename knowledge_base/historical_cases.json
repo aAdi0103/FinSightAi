@@ -1,0 +1,42 @@
+[
+  {
+    "case_id": "CASE-HIST-2024-0104",
+    "case_title": "Operation Midnight Drain: One-Shot Mobile Account Takeover",
+    "transaction_type": "TRANSFER",
+    "typical_amount_range": "$150,000 - $450,000",
+    "typology_category": "Account Takeover / SIM Swap",
+    "case_summary": "A retail banking customer suffered unauthorized account access via SIM swap. At 02:45 AM, the perpetrator initiated a single peer-to-peer TRANSFER of $181,000.00, reducing the victim's old balance of $181,000.00 to exactly $0.00. The beneficiary account was a newly created digital wallet showing zero prior transaction history.",
+    "investigative_findings": "The transaction was flagged by real-time ML anomaly detection for simultaneous account draining (100% depletion) and off-hours execution. The recipient ledger showed immediate hold placement before cash-out could be completed.",
+    "resolution_and_action": "Beneficiary funds frozen within 12 minutes. Originator account secured with biometric re-authentication. 100% of funds recovered. Suspicious Activity Report (SAR) filed under RBI Master Direction 4.1."
+  },
+  {
+    "case_id": "CASE-HIST-2023-0882",
+    "case_title": "The Ghost Beneficiary Exploit: Accounting Mismatch in Mobile Core",
+    "transaction_type": "TRANSFER",
+    "typical_amount_range": "$200,000 - $1,200,000",
+    "typology_category": "Core Banking Ledger Manipulation / Uncredited Recipient",
+    "case_summary": "Fraudsters exploited an API vulnerability in a mobile banking gateway. The victim's account was debited $320,000.00, reducing their balance to zero, but destination balance logs reflected no immediate ledger credit (receiver balance remained unchanged), indicating an intercepted or canceled routing stream.",
+    "investigative_findings": "Automated ledger reconciliation identified a $320,000 sender debit error and receiver credit mismatch. Machine learning anomaly score exceeded the 99th percentile cutoff due to combined high-value breach and accounting divergence.",
+    "resolution_and_action": "Transaction reversed at switch level. Destination account placed on permanent blacklist. Gateway API patched against concurrency race conditions."
+  },
+  {
+    "case_id": "CASE-HIST-2023-0419",
+    "case_title": "Rapid Cash-Out Mule Funneling Ring",
+    "transaction_type": "CASH_OUT",
+    "typical_amount_range": "$50,000 - $300,000",
+    "typology_category": "Money Mule Off-Ramping",
+    "case_summary": "A syndicate used recruited college student accounts as money mules. Stolen funds from corporate wire transfers were split into $190,000 increments and routed into mule accounts, which were immediately liquidated via CASH_OUT merchant agents within minutes.",
+    "investigative_findings": "High correlation observed between preceding TRANSFER and immediate CASH_OUT with identical amount and sender account balance left at zero. The rapid velocity and zero retained balance matched FATF Red Flag Indicator 01.",
+    "resolution_and_action": "Agent POS terminals temporarily disabled. Law enforcement alerted with geolocation stamps. Accounts blocked and SAR filed with Financial Intelligence Unit."
+  },
+  {
+    "case_id": "CASE-HIST-2022-1105",
+    "case_title": "False Alarm: High-Net-Worth Property Downpayment",
+    "transaction_type": "TRANSFER",
+    "typical_amount_range": "$500,000 - $2,500,000",
+    "typology_category": "Legitimate High-Value Commercial Transaction (Inlier / Verified)",
+    "case_summary": "A verified premier banking client transferred $650,000 to an escrow account for real estate acquisition. While the transaction amount triggered high-value monitoring thresholds, the sender retained substantial remaining balance ($1.4M), the destination was a verified institutional escrow, and balance reconciliation showed exact zero accounting error.",
+    "investigative_findings": "ML anomaly score was moderately elevated due to amount scale, but rule-based risk stratification confirmed no account draining, zero accounting error, and daytime execution matching customer KYC profile.",
+    "resolution_and_action": "Automated verification confirmed customer authorization via 2FA token. Transaction cleared within standard SLA without false positive account lock."
+  }
+]

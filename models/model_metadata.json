@@ -1,0 +1,60 @@
+{
+    "model_type": "IsolationForest",
+    "library_version": {
+        "scikit_learn": "1.x"
+    },
+    "feature_names": [
+        "step",
+        "type",
+        "amount",
+        "oldbalanceOrg",
+        "newbalanceOrig",
+        "oldbalanceDest",
+        "newbalanceDest",
+        "balance_diff_sender",
+        "balance_diff_receiver",
+        "sender_error",
+        "receiver_error",
+        "sender_balance_drained",
+        "receiver_balance_unchanged",
+        "amount_vs_sender_balance_ratio",
+        "high_amount_flag",
+        "is_merchant_dest",
+        "log_amount",
+        "hour_of_day",
+        "day_of_sim"
+    ],
+    "n_features": 19,
+    "hyperparameters": {
+        "n_estimators": 100,
+        "max_samples": 256,
+        "contamination": 0.0013,
+        "random_state": 42,
+        "n_jobs": -1
+    },
+    "type_mapping": {
+        "0": "CASH_IN",
+        "1": "CASH_OUT",
+        "2": "DEBIT",
+        "3": "PAYMENT",
+        "4": "TRANSFER"
+    },
+    "training_time_seconds": 46.59,
+    "evaluation_metrics": {
+        "precision": 0.0316,
+        "recall": 0.0318,
+        "f1_score": 0.0317,
+        "roc_auc": 0.9112,
+        "pr_auc": 0.0303,
+        "confusion_matrix": {
+            "true_negatives": 6346396,
+            "false_positives": 8011,
+            "false_negatives": 7952,
+            "true_positives": 261
+        },
+        "total_samples": 6362620,
+        "actual_fraud_count": 8213,
+        "predicted_suspicious_count": 8272
+    },
+    "saved_at_utc": "2026-08-22T04:05:45Z"
+}

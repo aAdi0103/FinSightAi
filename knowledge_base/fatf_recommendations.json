@@ -1,0 +1,26 @@
+[
+  {
+    "id": "FATF-REC-16",
+    "source": "FATF Guidance on Wire Transfers (Recommendation 16)",
+    "section": "Guidance Item 16.4: Monitoring and Interception of Electronic Wire Transfers",
+    "title": "Cross-Border and Domestic Wire Transfers Involving Account Depletion",
+    "content": "Financial institutions must scrutinize electronic transfers that deviate from normal patterns of consumer behavior, specifically one-off transactions that liquidate total stored value. Recommendation 16 requires ordering and beneficiary institutions to verify originator and recipient data, and to freeze transactions exhibiting indicators of immediate funneling to untraceable accounts.",
+    "applicable_triggers": ["wire_transfer", "account_liquidation", "funneling"]
+  },
+  {
+    "id": "FATF-RED-01",
+    "source": "FATF Red Flag Indicators for Money Laundering and Terrorist Financing",
+    "section": "Typology 2: Rapid Movement and Pass-Through Entity Behavior",
+    "title": "Rapid Flow-Through of Funds with Minimal Account Retained Balance",
+    "content": "An account that acts solely as a temporary conduit, where funds are transferred in and then immediately transferred out or withdrawn in full, leaving a zero or near-zero balance, strongly indicates money laundering pass-through behavior. Entities should immediately review recipient account history and flag for Suspicious Activity Reporting (SAR/STR).",
+    "applicable_triggers": ["pass_through", "rapid_movement", "zero_retained_balance"]
+  },
+  {
+    "id": "FATF-RED-02",
+    "source": "FATF Operational Typologies on Virtual Assets & Electronic Payment Services",
+    "section": "Typology 5: Off-Peak High-Velocity Transfers",
+    "title": "Unusual Transaction Timing and Velocity Spikes",
+    "content": "Transaction velocity spikes during off-business hours, combined with transfer amounts approaching or breaching mandatory declaration thresholds, are key indicators of automated bot exploitation, API credential compromise, or coordinated multi-jurisdictional cyber heists.",
+    "applicable_triggers": ["velocity_spike", "off_peak", "threshold_avoidance"]
+  }
+]

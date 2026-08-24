@@ -1,0 +1,42 @@
+[
+  {
+    "id": "RBI-FRAUD-01",
+    "source": "RBI Master Direction - Fraud Risk Management (Updated 2024)",
+    "section": "Section 4.1: Early Warning Signals (EWS) for Electronic Fund Transfers",
+    "title": "Immediate Draining of Account Balance Following Inflow or Inactivity",
+    "content": "Regulated entities must implement real-time transaction monitoring to flag sudden and complete exhaustion of customer account balances (Account Draining). When an account with historically steady or dormant balances experiences a sudden outflow depleting 90% or more of available funds via peer-to-peer electronic transfer (RTGS/NEFT/IMPS), it constitutes a primary Early Warning Signal for Account Takeover (ATO) or unauthorized credential compromise. Banks are mandated to initiate immediate out-of-band verification.",
+    "applicable_triggers": ["account_draining", "severe_depletion", "transfer_outflow"]
+  },
+  {
+    "id": "RBI-FRAUD-02",
+    "source": "RBI Master Direction - Know Your Customer (KYC) and AML Monitoring",
+    "section": "Section 37: Scrutiny of High-Value and Inconsistent Transactions",
+    "title": "High-Value Transaction Threshold and Inconsistent Outflow Scrutiny",
+    "content": "Transactions exceeding Rs. 2,00,000 (Two Lakh Rupees) or equivalent foreign currency through electronic channels that are inconsistent with the customer's declared economic profile, transaction history, or business turnover must undergo enhanced risk screening. Regulated entities must verify beneficiary authenticity and ensure that underlying accounting entries reflect legitimate settlement without unexplained reconciliation gaps.",
+    "applicable_triggers": ["high_value", "threshold_breach", "profile_inconsistency"]
+  },
+  {
+    "id": "RBI-FRAUD-03",
+    "source": "RBI Cyber Security Framework in Banks",
+    "section": "Annex 1: Real-time Fraud Monitoring and Accounting Integrity",
+    "title": "Accounting Mismatches and Settlement Integrity in Core Banking Systems",
+    "content": "Any transaction event wherein debits to originator accounts fail to produce corresponding verified credits to destination accounts, or where balance updates show mathematical discrepancies relative to transacted amounts, must be halted by automated reconciliation controls. Such anomalies frequently indicate man-in-the-middle payload tampering, race condition exploits, or unauthorized transaction simulation attempts.",
+    "applicable_triggers": ["accounting_discrepancy", "receiver_uncredited", "settlement_gap"]
+  },
+  {
+    "id": "RBI-FRAUD-04",
+    "source": "RBI Advisory on Mule Accounts and Cyber Fraud Networks",
+    "section": "Advisory Note 2023/88: Rapid Cash Liquidation via ATMs and POS",
+    "title": "Rapid Cash-Out / Liquidation Following Digital Transfers",
+    "content": "A high-velocity transfer followed immediately by cash withdrawals (CASH_OUT) at unusual locations or off-peak hours is a recognized hallmark of 'Mule Account Rings'. Fraudsters rapidly liquidate illicitly transferred balances to prevent reversal upon victim reporting. Banks must deploy dynamic hold mechanisms on destination accounts exhibiting zero prior operating balance suddenly receiving large transfers.",
+    "applicable_triggers": ["cash_out_liquidation", "mule_network", "velocity_burst"]
+  },
+  {
+    "id": "RBI-FRAUD-05",
+    "source": "RBI Master Direction - Fraud Risk Management in Non-Banking Financial Systems",
+    "section": "Section 5.3: Off-Hours and Velocity Anomalies",
+    "title": "Temporal Anomalies and Off-Hours High-Risk Transfers",
+    "content": "High-value transfers initiated during non-standard hours (e.g., 01:00 to 05:00 hours) by retail accounts without a prior history of nocturnal transactions represent elevated operational risk. Systems must assign elevated risk weights and subject such transactions to secondary verification before final settlement.",
+    "applicable_triggers": ["off_hours", "temporal_anomaly", "nocturnal_transfer"]
+  }
+]

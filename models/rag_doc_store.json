@@ -1,0 +1,215 @@
+[
+  {
+    "doc_id": "RBI-FRAUD-01",
+    "category": "REGULATION",
+    "authority": "RBI (Reserve Bank of India)",
+    "title": "Immediate Draining of Account Balance Following Inflow or Inactivity",
+    "section": "Section 4.1: Early Warning Signals (EWS) for Electronic Fund Transfers",
+    "source": "RBI Master Direction - Fraud Risk Management (Updated 2024)",
+    "content": "Regulated entities must implement real-time transaction monitoring to flag sudden and complete exhaustion of customer account balances (Account Draining). When an account with historically steady or dormant balances experiences a sudden outflow depleting 90% or more of available funds via peer-to-peer electronic transfer (RTGS/NEFT/IMPS), it constitutes a primary Early Warning Signal for Account Takeover (ATO) or unauthorized credential compromise. Banks are mandated to initiate immediate out-of-band verification.",
+    "triggers": [
+      "account_draining",
+      "severe_depletion",
+      "transfer_outflow"
+    ],
+    "searchable_text": "Authority: RBI (Reserve Bank of India) | Title: Immediate Draining of Account Balance Following Inflow or Inactivity | Section: Section 4.1: Early Warning Signals (EWS) for Electronic Fund Transfers | Source: RBI Master Direction - Fraud Risk Management (Updated 2024) | Content: Regulated entities must implement real-time transaction monitoring to flag sudden and complete exhaustion of customer account balances (Account Draining). When an account with historically steady or dormant balances experiences a sudden outflow depleting 90% or more of available funds via peer-to-peer electronic transfer (RTGS/NEFT/IMPS), it constitutes a primary Early Warning Signal for Account Takeover (ATO) or unauthorized credential compromise. Banks are mandated to initiate immediate out-of-band verification. | Triggers: account_draining severe_depletion transfer_outflow"
+  },
+  {
+    "doc_id": "RBI-FRAUD-02",
+    "category": "REGULATION",
+    "authority": "RBI (Reserve Bank of India)",
+    "title": "High-Value Transaction Threshold and Inconsistent Outflow Scrutiny",
+    "section": "Section 37: Scrutiny of High-Value and Inconsistent Transactions",
+    "source": "RBI Master Direction - Know Your Customer (KYC) and AML Monitoring",
+    "content": "Transactions exceeding Rs. 2,00,000 (Two Lakh Rupees) or equivalent foreign currency through electronic channels that are inconsistent with the customer's declared economic profile, transaction history, or business turnover must undergo enhanced risk screening. Regulated entities must verify beneficiary authenticity and ensure that underlying accounting entries reflect legitimate settlement without unexplained reconciliation gaps.",
+    "triggers": [
+      "high_value",
+      "threshold_breach",
+      "profile_inconsistency"
+    ],
+    "searchable_text": "Authority: RBI (Reserve Bank of India) | Title: High-Value Transaction Threshold and Inconsistent Outflow Scrutiny | Section: Section 37: Scrutiny of High-Value and Inconsistent Transactions | Source: RBI Master Direction - Know Your Customer (KYC) and AML Monitoring | Content: Transactions exceeding Rs. 2,00,000 (Two Lakh Rupees) or equivalent foreign currency through electronic channels that are inconsistent with the customer's declared economic profile, transaction history, or business turnover must undergo enhanced risk screening. Regulated entities must verify beneficiary authenticity and ensure that underlying accounting entries reflect legitimate settlement without unexplained reconciliation gaps. | Triggers: high_value threshold_breach profile_inconsistency"
+  },
+  {
+    "doc_id": "RBI-FRAUD-03",
+    "category": "REGULATION",
+    "authority": "RBI (Reserve Bank of India)",
+    "title": "Accounting Mismatches and Settlement Integrity in Core Banking Systems",
+    "section": "Annex 1: Real-time Fraud Monitoring and Accounting Integrity",
+    "source": "RBI Cyber Security Framework in Banks",
+    "content": "Any transaction event wherein debits to originator accounts fail to produce corresponding verified credits to destination accounts, or where balance updates show mathematical discrepancies relative to transacted amounts, must be halted by automated reconciliation controls. Such anomalies frequently indicate man-in-the-middle payload tampering, race condition exploits, or unauthorized transaction simulation attempts.",
+    "triggers": [
+      "accounting_discrepancy",
+      "receiver_uncredited",
+      "settlement_gap"
+    ],
+    "searchable_text": "Authority: RBI (Reserve Bank of India) | Title: Accounting Mismatches and Settlement Integrity in Core Banking Systems | Section: Annex 1: Real-time Fraud Monitoring and Accounting Integrity | Source: RBI Cyber Security Framework in Banks | Content: Any transaction event wherein debits to originator accounts fail to produce corresponding verified credits to destination accounts, or where balance updates show mathematical discrepancies relative to transacted amounts, must be halted by automated reconciliation controls. Such anomalies frequently indicate man-in-the-middle payload tampering, race condition exploits, or unauthorized transaction simulation attempts. | Triggers: accounting_discrepancy receiver_uncredited settlement_gap"
+  },
+  {
+    "doc_id": "RBI-FRAUD-04",
+    "category": "REGULATION",
+    "authority": "RBI (Reserve Bank of India)",
+    "title": "Rapid Cash-Out / Liquidation Following Digital Transfers",
+    "section": "Advisory Note 2023/88: Rapid Cash Liquidation via ATMs and POS",
+    "source": "RBI Advisory on Mule Accounts and Cyber Fraud Networks",
+    "content": "A high-velocity transfer followed immediately by cash withdrawals (CASH_OUT) at unusual locations or off-peak hours is a recognized hallmark of 'Mule Account Rings'. Fraudsters rapidly liquidate illicitly transferred balances to prevent reversal upon victim reporting. Banks must deploy dynamic hold mechanisms on destination accounts exhibiting zero prior operating balance suddenly receiving large transfers.",
+    "triggers": [
+      "cash_out_liquidation",
+      "mule_network",
+      "velocity_burst"
+    ],
+    "searchable_text": "Authority: RBI (Reserve Bank of India) | Title: Rapid Cash-Out / Liquidation Following Digital Transfers | Section: Advisory Note 2023/88: Rapid Cash Liquidation via ATMs and POS | Source: RBI Advisory on Mule Accounts and Cyber Fraud Networks | Content: A high-velocity transfer followed immediately by cash withdrawals (CASH_OUT) at unusual locations or off-peak hours is a recognized hallmark of 'Mule Account Rings'. Fraudsters rapidly liquidate illicitly transferred balances to prevent reversal upon victim reporting. Banks must deploy dynamic hold mechanisms on destination accounts exhibiting zero prior operating balance suddenly receiving large transfers. | Triggers: cash_out_liquidation mule_network velocity_burst"
+  },
+  {
+    "doc_id": "RBI-FRAUD-05",
+    "category": "REGULATION",
+    "authority": "RBI (Reserve Bank of India)",
+    "title": "Temporal Anomalies and Off-Hours High-Risk Transfers",
+    "section": "Section 5.3: Off-Hours and Velocity Anomalies",
+    "source": "RBI Master Direction - Fraud Risk Management in Non-Banking Financial Systems",
+    "content": "High-value transfers initiated during non-standard hours (e.g., 01:00 to 05:00 hours) by retail accounts without a prior history of nocturnal transactions represent elevated operational risk. Systems must assign elevated risk weights and subject such transactions to secondary verification before final settlement.",
+    "triggers": [
+      "off_hours",
+      "temporal_anomaly",
+      "nocturnal_transfer"
+    ],
+    "searchable_text": "Authority: RBI (Reserve Bank of India) | Title: Temporal Anomalies and Off-Hours High-Risk Transfers | Section: Section 5.3: Off-Hours and Velocity Anomalies | Source: RBI Master Direction - Fraud Risk Management in Non-Banking Financial Systems | Content: High-value transfers initiated during non-standard hours (e.g., 01:00 to 05:00 hours) by retail accounts without a prior history of nocturnal transactions represent elevated operational risk. Systems must assign elevated risk weights and subject such transactions to secondary verification before final settlement. | Triggers: off_hours temporal_anomaly nocturnal_transfer"
+  },
+  {
+    "doc_id": "FATF-REC-16",
+    "category": "REGULATION",
+    "authority": "FATF (Financial Action Task Force)",
+    "title": "Cross-Border and Domestic Wire Transfers Involving Account Depletion",
+    "section": "Guidance Item 16.4: Monitoring and Interception of Electronic Wire Transfers",
+    "source": "FATF Guidance on Wire Transfers (Recommendation 16)",
+    "content": "Financial institutions must scrutinize electronic transfers that deviate from normal patterns of consumer behavior, specifically one-off transactions that liquidate total stored value. Recommendation 16 requires ordering and beneficiary institutions to verify originator and recipient data, and to freeze transactions exhibiting indicators of immediate funneling to untraceable accounts.",
+    "triggers": [
+      "wire_transfer",
+      "account_liquidation",
+      "funneling"
+    ],
+    "searchable_text": "Authority: FATF (Financial Action Task Force) | Title: Cross-Border and Domestic Wire Transfers Involving Account Depletion | Section: Guidance Item 16.4: Monitoring and Interception of Electronic Wire Transfers | Source: FATF Guidance on Wire Transfers (Recommendation 16) | Content: Financial institutions must scrutinize electronic transfers that deviate from normal patterns of consumer behavior, specifically one-off transactions that liquidate total stored value. Recommendation 16 requires ordering and beneficiary institutions to verify originator and recipient data, and to freeze transactions exhibiting indicators of immediate funneling to untraceable accounts. | Triggers: wire_transfer account_liquidation funneling"
+  },
+  {
+    "doc_id": "FATF-RED-01",
+    "category": "REGULATION",
+    "authority": "FATF (Financial Action Task Force)",
+    "title": "Rapid Flow-Through of Funds with Minimal Account Retained Balance",
+    "section": "Typology 2: Rapid Movement and Pass-Through Entity Behavior",
+    "source": "FATF Red Flag Indicators for Money Laundering and Terrorist Financing",
+    "content": "An account that acts solely as a temporary conduit, where funds are transferred in and then immediately transferred out or withdrawn in full, leaving a zero or near-zero balance, strongly indicates money laundering pass-through behavior. Entities should immediately review recipient account history and flag for Suspicious Activity Reporting (SAR/STR).",
+    "triggers": [
+      "pass_through",
+      "rapid_movement",
+      "zero_retained_balance"
+    ],
+    "searchable_text": "Authority: FATF (Financial Action Task Force) | Title: Rapid Flow-Through of Funds with Minimal Account Retained Balance | Section: Typology 2: Rapid Movement and Pass-Through Entity Behavior | Source: FATF Red Flag Indicators for Money Laundering and Terrorist Financing | Content: An account that acts solely as a temporary conduit, where funds are transferred in and then immediately transferred out or withdrawn in full, leaving a zero or near-zero balance, strongly indicates money laundering pass-through behavior. Entities should immediately review recipient account history and flag for Suspicious Activity Reporting (SAR/STR). | Triggers: pass_through rapid_movement zero_retained_balance"
+  },
+  {
+    "doc_id": "FATF-RED-02",
+    "category": "REGULATION",
+    "authority": "FATF (Financial Action Task Force)",
+    "title": "Unusual Transaction Timing and Velocity Spikes",
+    "section": "Typology 5: Off-Peak High-Velocity Transfers",
+    "source": "FATF Operational Typologies on Virtual Assets & Electronic Payment Services",
+    "content": "Transaction velocity spikes during off-business hours, combined with transfer amounts approaching or breaching mandatory declaration thresholds, are key indicators of automated bot exploitation, API credential compromise, or coordinated multi-jurisdictional cyber heists.",
+    "triggers": [
+      "velocity_spike",
+      "off_peak",
+      "threshold_avoidance"
+    ],
+    "searchable_text": "Authority: FATF (Financial Action Task Force) | Title: Unusual Transaction Timing and Velocity Spikes | Section: Typology 5: Off-Peak High-Velocity Transfers | Source: FATF Operational Typologies on Virtual Assets & Electronic Payment Services | Content: Transaction velocity spikes during off-business hours, combined with transfer amounts approaching or breaching mandatory declaration thresholds, are key indicators of automated bot exploitation, API credential compromise, or coordinated multi-jurisdictional cyber heists. | Triggers: velocity_spike off_peak threshold_avoidance"
+  },
+  {
+    "doc_id": "FINCEN-ADV-2023-01",
+    "category": "REGULATION",
+    "authority": "FinCEN (Financial Crimes Enforcement Network)",
+    "title": "Account Takeover (ATO) with Immediate Total Balance Transfer",
+    "section": "Advisory FIN-2023-A001: Patterns of Unauthorized Wire Transfers",
+    "source": "FinCEN Advisory on Cyber-Enabled Financial Crime and Account Takeover",
+    "content": "FinCEN analysis highlights that cybercriminals obtaining unauthorized access to consumer or corporate banking credentials frequently execute a single maximum-balance transfer rather than multiple small increments, in order to bypass periodic aggregate limits before user detection. The hallmark signature is a 100% depletion of the originating account's balance via instantaneous electronic wire.",
+    "triggers": [
+      "account_takeover",
+      "total_balance_depletion",
+      "credential_stuffing"
+    ],
+    "searchable_text": "Authority: FinCEN | Title: Account Takeover (ATO) with Immediate Total Balance Transfer | Section: Advisory FIN-2023-A001: Patterns of Unauthorized Wire Transfers | Source: FinCEN Advisory on Cyber-Enabled Financial Crime and Account Takeover | Content: FinCEN analysis highlights that cybercriminals obtaining unauthorized access to consumer or corporate banking credentials frequently execute a single maximum-balance transfer rather than multiple small increments, in order to bypass periodic aggregate limits before user detection. The hallmark signature is a 100% depletion of the originating account's balance via instantaneous electronic wire. | Triggers: account_takeover total_balance_depletion credential_stuffing"
+  },
+  {
+    "doc_id": "FINCEN-ADV-2022-04",
+    "category": "REGULATION",
+    "authority": "FinCEN (Financial Crimes Enforcement Network)",
+    "title": "Mule Recipient Profile with Dormant Historical Balances",
+    "section": "Guidance FIN-2022-G004: Identifying Destination Mule Nodes",
+    "source": "FinCEN Guidance on Funnel Accounts and Money Mule Recruitment",
+    "content": "Illicit proceeds are predominantly routed to recipient accounts that show prolonged dormancy or zero balances before suddenly receiving a high-value electronic transfer. In many simulated and real-world core banking attacks, funds are routed to ghost beneficiaries where the core banking ledger records an anomaly in destination balance updates.",
+    "triggers": [
+      "money_mule",
+      "dormant_recipient",
+      "ledger_discrepancy"
+    ],
+    "searchable_text": "Authority: FinCEN | Title: Mule Recipient Profile with Dormant Historical Balances | Section: Guidance FIN-2022-G004: Identifying Destination Mule Nodes | Source: FinCEN Guidance on Funnel Accounts and Money Mule Recruitment | Content: Illicit proceeds are predominantly routed to recipient accounts that show prolonged dormancy or zero balances before suddenly receiving a high-value electronic transfer. In many simulated and real-world core banking attacks, funds are routed to ghost beneficiaries where the core banking ledger records an anomaly in destination balance updates. | Triggers: money_mule dormant_recipient ledger_discrepancy"
+  },
+  {
+    "doc_id": "FINCEN-ADV-2021-02",
+    "category": "REGULATION",
+    "authority": "FinCEN (Financial Crimes Enforcement Network)",
+    "title": "Two-Stage Transfer-and-Cash-Out Exfiltration Sequence",
+    "section": "Advisory FIN-2021-A002: Liquidation Sequences",
+    "source": "FinCEN Advisory on Ransomware and Extortion Payment Routing",
+    "content": "Cyber fraud groups utilize a distinct two-step pipeline: (1) An unauthorized TRANSFER from the victim account to an intermediary, immediately followed by (2) a CASH_OUT liquidation transaction. When both transaction types are observed in close proximity with identical amounts, institutions should apply emergency hold protocols.",
+    "triggers": [
+      "two_stage_exfiltration",
+      "transfer_to_cashout",
+      "emergency_hold"
+    ],
+    "searchable_text": "Authority: FinCEN | Title: Two-Stage Transfer-and-Cash-Out Exfiltration Sequence | Section: Advisory FIN-2021-A002: Liquidation Sequences | Source: FinCEN Advisory on Ransomware and Extortion Payment Routing | Content: Cyber fraud groups utilize a distinct two-step pipeline: (1) An unauthorized TRANSFER from the victim account to an intermediary, immediately followed by (2) a CASH_OUT liquidation transaction. When both transaction types are observed in close proximity with identical amounts, institutions should apply emergency hold protocols. | Triggers: two_stage_exfiltration transfer_to_cashout emergency_hold"
+  },
+  {
+    "doc_id": "CASE-HIST-2024-0104",
+    "category": "HISTORICAL_CASE",
+    "authority": "Historical Bank Investigation Precedent",
+    "title": "Operation Midnight Drain: One-Shot Mobile Account Takeover",
+    "typology": "Account Takeover / SIM Swap",
+    "transaction_type": "TRANSFER",
+    "content": "A retail banking customer suffered unauthorized account access via SIM swap. At 02:45 AM, the perpetrator initiated a single peer-to-peer TRANSFER of $181,000.00, reducing the victim's old balance of $181,000.00 to exactly $0.00. The beneficiary account was a newly created digital wallet showing zero prior transaction history.",
+    "findings": "The transaction was flagged by real-time ML anomaly detection for simultaneous account draining (100% depletion) and off-hours execution. The recipient ledger showed immediate hold placement before cash-out could be completed.",
+    "resolution": "Beneficiary funds frozen within 12 minutes. Originator account secured with biometric re-authentication. 100% of funds recovered. Suspicious Activity Report (SAR) filed under RBI Master Direction 4.1.",
+    "searchable_text": "Case Precedent: CASE-HIST-2024-0104 | Title: Operation Midnight Drain: One-Shot Mobile Account Takeover | Typology: Account Takeover / SIM Swap | Transaction Type: TRANSFER | Summary: A retail banking customer suffered unauthorized account access via SIM swap. At 02:45 AM, the perpetrator initiated a single peer-to-peer TRANSFER of $181,000.00, reducing the victim's old balance of $181,000.00 to exactly $0.00. The beneficiary account was a newly created digital wallet showing zero prior transaction history. | Findings: The transaction was flagged by real-time ML anomaly detection for simultaneous account draining (100% depletion) and off-hours execution. The recipient ledger showed immediate hold placement before cash-out could be completed. | Resolution: Beneficiary funds frozen within 12 minutes. Originator account secured with biometric re-authentication. 100% of funds recovered. Suspicious Activity Report (SAR) filed under RBI Master Direction 4.1."
+  },
+  {
+    "doc_id": "CASE-HIST-2023-0882",
+    "category": "HISTORICAL_CASE",
+    "authority": "Historical Bank Investigation Precedent",
+    "title": "The Ghost Beneficiary Exploit: Accounting Mismatch in Mobile Core",
+    "typology": "Core Banking Ledger Manipulation / Uncredited Recipient",
+    "transaction_type": "TRANSFER",
+    "content": "Fraudsters exploited an API vulnerability in a mobile banking gateway. The victim's account was debited $320,000.00, reducing their balance to zero, but destination balance logs reflected no immediate ledger credit (receiver balance remained unchanged), indicating an intercepted or canceled routing stream.",
+    "findings": "Automated ledger reconciliation identified a $320,000 sender debit error and receiver credit mismatch. Machine learning anomaly score exceeded the 99th percentile cutoff due to combined high-value breach and accounting divergence.",
+    "resolution": "Transaction reversed at switch level. Destination account placed on permanent blacklist. Gateway API patched against concurrency race conditions.",
+    "searchable_text": "Case Precedent: CASE-HIST-2023-0882 | Title: The Ghost Beneficiary Exploit: Accounting Mismatch in Mobile Core | Typology: Core Banking Ledger Manipulation / Uncredited Recipient | Transaction Type: TRANSFER | Summary: Fraudsters exploited an API vulnerability in a mobile banking gateway. The victim's account was debited $320,000.00, reducing their balance to zero, but destination balance logs reflected no immediate ledger credit (receiver balance remained unchanged), indicating an intercepted or canceled routing stream. | Findings: Automated ledger reconciliation identified a $320,000 sender debit error and receiver credit mismatch. Machine learning anomaly score exceeded the 99th percentile cutoff due to combined high-value breach and accounting divergence. | Resolution: Transaction reversed at switch level. Destination account placed on permanent blacklist. Gateway API patched against concurrency race conditions."
+  },
+  {
+    "doc_id": "CASE-HIST-2023-0419",
+    "category": "HISTORICAL_CASE",
+    "authority": "Historical Bank Investigation Precedent",
+    "title": "Rapid Cash-Out Mule Funneling Ring",
+    "typology": "Money Mule Off-Ramping",
+    "transaction_type": "CASH_OUT",
+    "content": "A syndicate used recruited college student accounts as money mules. Stolen funds from corporate wire transfers were split into $190,000 increments and routed into mule accounts, which were immediately liquidated via CASH_OUT merchant agents within minutes.",
+    "findings": "High correlation observed between preceding TRANSFER and immediate CASH_OUT with identical amount and sender account balance left at zero. The rapid velocity and zero retained balance matched FATF Red Flag Indicator 01.",
+    "resolution": "Agent POS terminals temporarily disabled. Law enforcement alerted with geolocation stamps. Accounts blocked and SAR filed with Financial Intelligence Unit.",
+    "searchable_text": "Case Precedent: CASE-HIST-2023-0419 | Title: Rapid Cash-Out Mule Funneling Ring | Typology: Money Mule Off-Ramping | Transaction Type: CASH_OUT | Summary: A syndicate used recruited college student accounts as money mules. Stolen funds from corporate wire transfers were split into $190,000 increments and routed into mule accounts, which were immediately liquidated via CASH_OUT merchant agents within minutes. | Findings: High correlation observed between preceding TRANSFER and immediate CASH_OUT with identical amount and sender account balance left at zero. The rapid velocity and zero retained balance matched FATF Red Flag Indicator 01. | Resolution: Agent POS terminals temporarily disabled. Law enforcement alerted with geolocation stamps. Accounts blocked and SAR filed with Financial Intelligence Unit."
+  },
+  {
+    "doc_id": "CASE-HIST-2022-1105",
+    "category": "HISTORICAL_CASE",
+    "authority": "Historical Bank Investigation Precedent",
+    "title": "False Alarm: High-Net-Worth Property Downpayment",
+    "typology": "Legitimate High-Value Commercial Transaction (Inlier / Verified)",
+    "transaction_type": "TRANSFER",
+    "content": "A verified premier banking client transferred $650,000 to an escrow account for real estate acquisition. While the transaction amount triggered high-value monitoring thresholds, the sender retained substantial remaining balance ($1.4M), the destination was a verified institutional escrow, and balance reconciliation showed exact zero accounting error.",
+    "findings": "ML anomaly score was moderately elevated due to amount scale, but rule-based risk stratification confirmed no account draining, zero accounting error, and daytime execution matching customer KYC profile.",
+    "resolution": "Automated verification confirmed customer authorization via 2FA token. Transaction cleared within standard SLA without false positive account lock.",
+    "searchable_text": "Case Precedent: CASE-HIST-2022-1105 | Title: False Alarm: High-Net-Worth Property Downpayment | Typology: Legitimate High-Value Commercial Transaction (Inlier / Verified) | Transaction Type: TRANSFER | Summary: A verified premier banking client transferred $650,000 to an escrow account for real estate acquisition. While the transaction amount triggered high-value monitoring thresholds, the sender retained substantial remaining balance ($1.4M), the destination was a verified institutional escrow, and balance reconciliation showed exact zero accounting error. | Findings: ML anomaly score was moderately elevated due to amount scale, but rule-based risk stratification confirmed no account draining, zero accounting error, and daytime execution matching customer KYC profile. | Resolution: Automated verification confirmed customer authorization via 2FA token. Transaction cleared within standard SLA without false positive account lock."
+  }
+]

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#070b14">
+    <title>FinSight AI — Financial Transaction Risk Investigation System</title>
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="shortcut icon" href="/static/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <div class="brand-logo" title="FinSight AI Risk Engine">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="logo-svg">
+                    <defs>
+                        <linearGradient id="nav-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#60a5fa" />
+                            <stop offset="50%" stop-color="#2563eb" />
+                            <stop offset="100%" stop-color="#0284c7" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M32 4 L54 12 V30 C54 44.5 44.2 56.4 32 60 C19.8 56.4 10 44.5 10 30 V12 L32 4 Z"
+                        fill="url(#nav-logo-grad)" opacity="0.18" />
+                    <path d="M32 6 L52 13.5 V30 C52 43 43.3 53.6 32 57 C20.7 53.6 12 43 12 30 V13.5 L32 6 Z"
+                        stroke="url(#nav-logo-grad)" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                    <path d="M19 31 C24 23 40 23 45 31 C40 39 24 39 19 31 Z" stroke="url(#nav-logo-grad)"
+                        stroke-width="3" fill="none" stroke-linecap="round" />
+                    <circle cx="32" cy="31" r="5" fill="url(#nav-logo-grad)" />
+                    <circle cx="32" cy="31" r="2" fill="#ffffff" />
+                    <circle cx="32" cy="19" r="1.5" fill="#38bdf8" />
+                    <circle cx="32" cy="43" r="1.5" fill="#38bdf8" />
+                </svg>
+            </div>
+            <div class="brand-text">
+                <h1 class="brand-title">FinSight <span class="ai-badge">AI</span></h1>
+                <p>AI-Assisted Financial Transaction Risk Investigation System</p>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="theme-btn" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-container">
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs" role="tablist">
+            <button class="tab-btn active" data-tab="single-desk">
+                <i class="fa-solid fa-magnifying-glass-chart"></i> Investigation Desk
+            </button>
+            <button class="tab-btn" data-tab="knowledge-base">
+                <i class="fa-solid fa-book-bookmark"></i> Regulatory Knowledge Base
+            </button>
+        </nav>
+
+        <!-- TAB 1: SINGLE INVESTIGATION DESK -->
+        <section id="single-desk" class="tab-content active">
+            <!-- VIEW 1: TRANSACTION PARAMETERS FORM -->
+            <div id="parameters-view" class="desk-view active">
+                <div class="glass-card form-container-card">
+                    <div class="view-header">
+                        <h2><i class="fa-solid fa-receipt"></i> Transaction Risk Investigation</h2>
+                        <p class="view-subtitle">Enter financial transaction attributes below to execute ML anomaly
+                            scoring & regulatory RAG analysis.</p>
+                    </div>
+
+                    <form id="investigate-form" class="aligned-form">
+                        <!-- SECTION 1: GENERAL TRANSACTION DETAILS -->
+                        <div class="form-section-card">
+                            <div class="section-title-bar">
+                                <span class="step-indicator">1</span>
+                                <h3><i class="fa-solid fa-receipt"></i> General Transaction Parameters</h3>
+                            </div>
+                            <div class="inputs-grid-3">
+                                <div class="form-group">
+                                    <label for="txn-type">Transaction Type</label>
+                                    <select id="txn-type" required>
+                                        <option value="TRANSFER">TRANSFER (Peer-to-Peer Wire)</option>
+                                        <option value="CASH_OUT">CASH_OUT (ATM / Cash Withdrawal)</option>
+                                        <option value="PAYMENT">PAYMENT (Merchant Purchase)</option>
+                                        <option value="CASH_IN">CASH_IN (Domestic Deposit)</option>
+                                        <option value="DEBIT">DEBIT (Direct Debit)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txn-amount">Transaction Amount (₹)</label>
+                                    <input type="text" id="txn-amount" inputmode="decimal"
+                                        placeholder="250000.00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txn-timestamp">Transaction Date & Time</label>
+                                    <input type="datetime-local" id="txn-timestamp" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 2: SENDER / ORIGINATOR -->
+                        <div class="form-section-card">
+                            <div class="section-title-bar">
+                                <span class="step-indicator">2</span>
+                                <h3><i class="fa-solid fa-user-minus"></i> Sender (Originator) Account</h3>
+                            </div>
+                            <div class="inputs-grid-3">
+                                <div class="form-group">
+                                    <label for="sender-orig">Originator Account ID</label>
+                                    <input type="text" id="sender-orig" placeholder="C841298412"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sender-old">Sender Balance BEFORE (₹)</label>
+                                    <input type="text" id="sender-old" inputmode="decimal"
+                                        placeholder="250000.00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sender-new">Sender Balance AFTER (₹)</label>
+                                    <input type="text" id="sender-new" inputmode="decimal"
+                                        placeholder="0.00" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 3: RECIPIENT / DESTINATION -->
+                        <div class="form-section-card">
+                            <div class="section-title-bar">
+                                <span class="step-indicator">3</span>
+                                <h3><i class="fa-solid fa-user-plus"></i> Recipient (Beneficiary) Account</h3>
+                            </div>
+                            <div class="inputs-grid-3">
+                                <div class="form-group">
+                                    <label for="dest-id">Recipient Account ID</label>
+                                    <input type="text" id="dest-id" placeholder="C991823122"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dest-old">Recipient Balance BEFORE (₹)</label>
+                                    <input type="text" id="dest-old" inputmode="decimal" placeholder="0.00"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dest-new">Recipient Balance AFTER (₹)</label>
+                                    <input type="text" id="dest-new" inputmode="decimal" placeholder="0.00"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SUBMIT BUTTONS -->
+                        <div class="form-actions-bar">
+                            <button type="submit" id="btn-investigate" class="btn btn-primary btn-large">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Launch Full AI Investigation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- VIEW 2: DETAILED ANALYSIS DOSSIER VIEW -->
+            <div id="analysis-view" class="desk-view" style="display: none;">
+                <div class="glass-card results-container-card">
+                    <div class="analysis-nav-header">
+                        <button type="button" id="btn-back-to-params" class="btn btn-secondary back-btn">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Parameters
+                        </button>
+                        <div class="analysis-header-title">
+                            <h2><i class="fa-solid fa-shield-virus"></i> AI Risk Investigation Dossier</h2>
+                        </div>
+                    </div>
+
+                    <div class="dossier-content" id="dossier-content">
+                        <!-- Header Banner -->
+                        <div class="dossier-banner" id="dossier-banner">
+                            <div class="banner-badge" id="risk-badge">CRITICAL RISK</div>
+                            <div class="banner-meta">
+                                <span id="banner-score">Severity Score: 100/100</span>
+                            </div>
+                        </div>
+
+                        <!-- Executive Summary -->
+                        <div class="dossier-section">
+                            <h3><i class="fa-solid fa-file-lines"></i> Executive Investigation Summary</h3>
+                            <div class="summary-box" id="executive-summary-text"></div>
+                        </div>
+
+                        <!-- Triggered Risk Indicators -->
+                        <div class="dossier-section">
+                            <h3><i class="fa-solid fa-triangle-exclamation"></i> Business Risk Indicators</h3>
+                            <ul class="indicators-list" id="indicators-list"></ul>
+                        </div>
+
+                        <!-- Regulatory Directives Cited -->
+                        <div class="dossier-section">
+                            <h3><i class="fa-solid fa-scale-balanced"></i> Regulatory Compliance & Directives</h3>
+                            <div class="citations-grid" id="regulations-container"></div>
+                        </div>
+
+                        <!-- Historical Precedent Matches -->
+                        <div class="dossier-section">
+                            <h3><i class="fa-solid fa-clock-rotate-left"></i> Historical Investigation Precedents</h3>
+                            <div class="precedents-grid" id="precedents-container"></div>
+                        </div>
+
+                        <!-- Recommended Action Checklist -->
+                        <div class="dossier-section">
+                            <h3><i class="fa-solid fa-list-check"></i> Recommended Analyst Actions</h3>
+                            <div class="checklist-container" id="actions-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- TAB 3: REGULATORY KNOWLEDGE BASE -->
+        <section id="knowledge-base" class="tab-content">
+            <div class="glass-card kb-search-card">
+                <div class="kb-header">
+                    <h2><i class="fa-solid fa-book-atlas"></i> Regulatory Directives & Historical Case Playbooks</h2>
+                    <p>Search RBI Master Directions, FATF Red Flag Recommendations, FinCEN Typologies, and Historical
+                        Case Precedents.</p>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="kb-search-input"
+                        placeholder="Search guidelines (e.g., account draining, wire transfer, mule network, threshold)...">
+                    <button class="btn btn-primary" id="btn-kb-search">Search RAG Index</button>
+                </div>
+            </div>
+
+            <div class="kb-results-grid" id="kb-results-container">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

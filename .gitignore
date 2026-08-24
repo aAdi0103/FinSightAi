@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables & secrets
+.env
+.env.local
+*.env
+
+# Datasets (large CSV data files exceeding GitHub limits)
+*.csv
+Data/*.csv
+Data/*.zip
+Data/*.tar.gz
+Data/*.parquet
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and test outputs
+*.log
+.pytest_cache/
+.coverage
+htmlcov/

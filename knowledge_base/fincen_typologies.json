@@ -1,0 +1,26 @@
+[
+  {
+    "id": "FINCEN-ADV-2023-01",
+    "source": "FinCEN Advisory on Cyber-Enabled Financial Crime and Account Takeover",
+    "section": "Advisory FIN-2023-A001: Patterns of Unauthorized Wire Transfers",
+    "title": "Account Takeover (ATO) with Immediate Total Balance Transfer",
+    "content": "FinCEN analysis highlights that cybercriminals obtaining unauthorized access to consumer or corporate banking credentials frequently execute a single maximum-balance transfer rather than multiple small increments, in order to bypass periodic aggregate limits before user detection. The hallmark signature is a 100% depletion of the originating account's balance via instantaneous electronic wire.",
+    "applicable_triggers": ["account_takeover", "total_balance_depletion", "credential_stuffing"]
+  },
+  {
+    "id": "FINCEN-ADV-2022-04",
+    "source": "FinCEN Guidance on Funnel Accounts and Money Mule Recruitment",
+    "section": "Guidance FIN-2022-G004: Identifying Destination Mule Nodes",
+    "title": "Mule Recipient Profile with Dormant Historical Balances",
+    "content": "Illicit proceeds are predominantly routed to recipient accounts that show prolonged dormancy or zero balances before suddenly receiving a high-value electronic transfer. In many simulated and real-world core banking attacks, funds are routed to ghost beneficiaries where the core banking ledger records an anomaly in destination balance updates.",
+    "applicable_triggers": ["money_mule", "dormant_recipient", "ledger_discrepancy"]
+  },
+  {
+    "id": "FINCEN-ADV-2021-02",
+    "source": "FinCEN Advisory on Ransomware and Extortion Payment Routing",
+    "section": "Advisory FIN-2021-A002: Liquidation Sequences",
+    "title": "Two-Stage Transfer-and-Cash-Out Exfiltration Sequence",
+    "content": "Cyber fraud groups utilize a distinct two-step pipeline: (1) An unauthorized TRANSFER from the victim account to an intermediary, immediately followed by (2) a CASH_OUT liquidation transaction. When both transaction types are observed in close proximity with identical amounts, institutions should apply emergency hold protocols.",
+    "applicable_triggers": ["two_stage_exfiltration", "transfer_to_cashout", "emergency_hold"]
+  }
+]
