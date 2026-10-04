@@ -1,19 +1,3 @@
-"""
-ml/train.py
-===========
-
-Trains an unsupervised Isolation Forest model on the PaySim preprocessed feature matrix to isolate anomalous/fraudulent financial transactions.
-
-Key Responsibilities:
-    1. Load processed feature matrix X and held-out labels y.
-    2. Instantiate & train Isolation Forest with tuned hyperparameters.
-    3. Generate binary predictions (Normal vs Suspicious) and continuous anomaly scores.
-    4. Evaluate performance against ground-truth labels (Precision, Recall, F1, PR-AUC, ROC-AUC).
-    5. Generate diagnostic visualizations (PR curve, ROC curve, Confusion Matrix, Score Distribution).
-    6. Persist model, scaler, and metadata artifacts into models/ directory.
-    7. Generate a comprehensive Phase 2 evaluation report in reports/.
-"""
-
 import json
 import logging
 import os
@@ -126,10 +110,6 @@ def compute_predictions_and_scores(
 
     return raw_preds, binary_preds, anomaly_scores
 
-
-# ---------------------------------------------------------------------------
-# 3. EVALUATION METRICS & VISUALIZATION
-# ---------------------------------------------------------------------------
 
 def evaluate_model(
     y_true: pd.Series,
@@ -276,10 +256,6 @@ def evaluate_model(
     return metrics
 
 
-# ---------------------------------------------------------------------------
-# 4. ARTIFACT PERSISTENCE
-# ---------------------------------------------------------------------------
-
 def save_artifacts(
     model: IsolationForest,
     scaler: Any,
@@ -333,10 +309,6 @@ def save_artifacts(
 
     logger.info("All artifacts successfully saved.")
 
-
-# ---------------------------------------------------------------------------
-# 5. GENERATE EVALUATION REPORT MARKDOWN
-# ---------------------------------------------------------------------------
 
 def generate_report_markdown(
     metrics: Dict[str, Any],
@@ -462,10 +434,6 @@ All model components required for independent inference are serialized in `model
     logger.info("Report successfully written to %s", report_path)
     return report_path
 
-
-# ---------------------------------------------------------------------------
-# 6. MAIN EXECUTION PIPELINE
-# ---------------------------------------------------------------------------
 
 def run_training_pipeline(csv_path: str = DATA_PATH) -> None:
     """

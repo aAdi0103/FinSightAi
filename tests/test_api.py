@@ -22,6 +22,12 @@ def test_health_check():
     print("\n[PASSED] Health Check Test")
 
 
+def test_health_check_supports_head():
+    response = client.head("/health")
+    assert response.status_code == 200
+    print("\n[PASSED] Health Check HEAD Test")
+
+
 def test_predict_endpoint():
     payload = {
         "step": 1,

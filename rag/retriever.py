@@ -1,15 +1,3 @@
-"""
-rag/retriever.py
-================
-Evidence Retriever for the Financial Transaction Investigation System.
-
-Loads the vector index and metadata store to perform semantic similarity
-search across RBI regulations, FATF recommendations, FinCEN advisories, and
-historical fraud cases.
-
-Author: AI-Assisted Financial Transaction Risk Investigation System
-"""
-
 import json
 import logging
 import os
@@ -19,9 +7,6 @@ import joblib
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-# ---------------------------------------------------------------------------
-# CONFIGURATION
-# ---------------------------------------------------------------------------
 
 MODELS_DIR = os.getenv("MODELS_DIR", "models")
 VEC_FILE = os.path.join(MODELS_DIR, "rag_vectorizer.joblib")
@@ -35,10 +20,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
-# ---------------------------------------------------------------------------
-# RETRIEVER ENGINE (SINGLETON)
-# ---------------------------------------------------------------------------
 
 class EvidenceRetriever:
     """Singleton class for fast vector similarity search."""
@@ -75,16 +56,7 @@ class EvidenceRetriever:
         return cls._instance
 
     def search(self, query: str, top_k: int = 4) -> Dict[str, Any]:
-        """
-        Execute semantic similarity search against indexed regulations and cases.
-
-        Args:
-            query: Natural language query (synthesized from risk indicators).
-            top_k: Number of documents to retrieve per category.
-
-        Returns:
-            Dictionary partitioned into regulations, historical_cases, and a formatted prompt block.
-        """
+        
         query_vec = self.vectorizer.transform([query])
         similarities = cosine_similarity(query_vec, self.doc_matrix).flatten()
 

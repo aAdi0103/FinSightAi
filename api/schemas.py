@@ -3,10 +3,6 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 
-# ---------------------------------------------------------------------------
-# 1. TRANSACTION INPUT SCHEMAS
-# ---------------------------------------------------------------------------
-
 class SingleTransactionInput(BaseModel):
     timestamp: Optional[str] = Field(None, description="Transaction ISO date-time string e.g. '2026-08-22T03:00'")
     step: Optional[int] = Field(None, description="Simulation timeline step / hour (1 to 744)")
@@ -35,10 +31,6 @@ class SingleTransactionInput(BaseModel):
         }
 
 
-# ---------------------------------------------------------------------------
-# 2. EVIDENCE & CITATION SCHEMAS
-# ---------------------------------------------------------------------------
-
 class RegulatoryCitation(BaseModel):
     code: str
     authority: str
@@ -54,10 +46,6 @@ class PrecedentCaseMatch(BaseModel):
     similarity_score: float
     historical_outcome: str
 
-
-# ---------------------------------------------------------------------------
-# 3. REPORT OUTPUT SCHEMAS
-# ---------------------------------------------------------------------------
 
 class MLAnalysisResult(BaseModel):
     prediction: str

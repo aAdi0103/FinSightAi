@@ -1,4 +1,3 @@
-
 import json
 import logging
 import os
@@ -9,10 +8,6 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import RobustScaler
-
-# ---------------------------------------------------------------------------
-# CONFIGURATION
-# ---------------------------------------------------------------------------
 
 MODELS_DIR = os.getenv("MODELS_DIR", "models")
 MODEL_FILE = os.path.join(MODELS_DIR, "isolation_forest.joblib")
@@ -45,9 +40,10 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
-# ARTIFACT LOADER (LAZY SINGLETON PATTERN)
-# ---------------------------------------------------------------------------
+# Artifacts are the saved knowledge and supporting tools from training. They ensure every new transaction is 
+# processed in exactly the same way as the training data, allowing the trained Isolation Forest to make reliable
+# predictions. Without them, the model either cannot run at all or produces incorrect results because the input
+# no longer matches what it learned during training.
 
 class ArtifactStore:
     """Singleton container to load and cache model artifacts in memory."""
@@ -99,34 +95,19 @@ class ArtifactStore:
         return cls._instance
 
 
-# ---------------------------------------------------------------------------
-# INFERENCE PREPROCESSING
-# ---------------------------------------------------------------------------
+# this method preprocesses the transaction data means it engineer the features  and apply the scaling and
+# type encoding etc. It accepts single transaction data as a dictionary or a pandas DataFrame and returns a pandas DataFrame
+# with engineered features. It also handles the missing values and data type conversions. 
 
+# Once the model is trained, we save everything it learned (model, scaler, metadata, mappings). 
+# Every time a new transaction arrives, we load these saved artifacts
+# and use them to preprocess the new data exactly like the training data,
+# then ask the trained model to make a prediction.
 def preprocess_single_transaction(
     transaction: Union[Dict[str, Any], pd.DataFrame],
     artifacts: ArtifactStore,
 ) -> pd.DataFrame:
-    """
-    Apply feature engineering, categorical encoding, and scaling to a single
-    transaction record or a mini-batch DataFrame.
 
-    Args:
-        transaction: Dictionary or DataFrame containing raw transaction fields:
-          - step (int)
-          - type (str): 'CASH_IN', 'CASH_OUT', 'DEBIT', 'PAYMENT', 'TRANSFER'
-          - amount (float)
-          - nameOrig (str, optional)
-          - oldbalanceOrg (float)
-          - newbalanceOrig (float)
-          - nameDest (str, optional)
-          - oldbalanceDest (float)
-          - newbalanceDest (float)
-        artifacts: Pre-loaded ArtifactStore instance.
-
-    Returns:
-        pd.DataFrame containing engineered and scaled features matching model input.
-    """
     if isinstance(transaction, dict):
         df = pd.DataFrame([transaction])
     else:
@@ -138,7 +119,7 @@ def preprocess_single_transaction(
     if "nameDest" not in df.columns:
         df["nameDest"] = "C_UNKNOWN"
 
-    # Ensure correct data types
+    # converting data types 
     df["step"] = df["step"].astype("int32")
     df["amount"] = df["amount"].astype("float32")
     df["oldbalanceOrg"] = df["oldbalanceOrg"].astype("float32")
@@ -146,29 +127,43 @@ def preprocess_single_transaction(
     df["oldbalanceDest"] = df["oldbalanceDest"].astype("float32")
     df["newbalanceDest"] = df["newbalanceDest"].astype("float32")
 
-    # 1. Feature Engineering
+    # Feature Engineering here we create new features based on the transaction data 
+    
+    # large difference is common in fraud 
     df["balance_diff_sender"] = df["oldbalanceOrg"] - df["newbalanceOrig"]
+
+    # tells how much money receiver gained 
     df["balance_diff_receiver"] = df["newbalanceDest"] - df["oldbalanceDest"]
+
+    # Fraudulent transactions often create unexpected balance changes. Here if error is 0 then it's fine 
+    # otherwise it is a strong indicator of fraud 
     df["sender_error"] = (
         (df["oldbalanceOrg"] - df["newbalanceOrig"] - df["amount"]).abs().astype("float32")
     )
     df["receiver_error"] = (
         (df["oldbalanceDest"] + df["amount"] - df["newbalanceDest"]).abs().astype("float32")
     )
+
+    # Fraudsters often empty compromised accounts.
     df["sender_balance_drained"] = (
         (df["oldbalanceOrg"] > 0) & (df["newbalanceOrig"] == 0)
     ).astype("int8")
     df["receiver_balance_unchanged"] = (
         df["oldbalanceDest"] == df["newbalanceDest"]
     ).astype("int8")
+
+    # The ratio of transaction amount to sender balance helps identify unusually large transfers. 
     df["amount_vs_sender_balance_ratio"] = (
         df["amount"] / (df["oldbalanceOrg"] + 1.0)
     ).astype("float32")
+
     df["high_amount_flag"] = (
         df["amount"] > LARGE_TRANSFER_THRESHOLD
     ).astype("int8")
     df["is_merchant_dest"] = df["nameDest"].astype(str).str.startswith("M").astype("int8")
     df["log_amount"] = np.log1p(df["amount"]).astype("float32")
+
+
     df["hour_of_day"] = (df["step"] % 24).astype("int8")
     df["day_of_sim"] = (df["step"] // 24).astype("int8")
 
@@ -184,36 +179,8 @@ def preprocess_single_transaction(
     X = df[artifacts.feature_names].copy()
     return X
 
-
-# ---------------------------------------------------------------------------
-# PUBLIC INFERENCE INTERFACE
-# ---------------------------------------------------------------------------
-
 def predict_transaction(transaction: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Score an incoming transaction using the trained Isolation Forest model.
-
-    Args:
-        transaction: Dictionary containing transaction attributes:
-            {
-                "step": 1,
-                "type": "TRANSFER",
-                "amount": 181.0,
-                "nameOrig": "C123456789",
-                "oldbalanceOrg": 181.0,
-                "newbalanceOrig": 0.0,
-                "nameDest": "C987654321",
-                "oldbalanceDest": 0.0,
-                "newbalanceDest": 0.0
-            }
-
-    Returns:
-        Dictionary strictly conforming to Phase 2 requirements:
-            {
-                "prediction": "Normal" | "Suspicious",
-                "anomaly_score": float
-            }
-    """
+    
     artifacts = ArtifactStore.get_instance()
     X = preprocess_single_transaction(transaction, artifacts)
 
@@ -230,11 +197,7 @@ def predict_transaction(transaction: Dict[str, Any]) -> Dict[str, Any]:
         "anomaly_score": anomaly_score,
     }
 
-
-# ---------------------------------------------------------------------------
 # CLI / TESTING ENTRYPOINT
-# ---------------------------------------------------------------------------
-
 if __name__ == "__main__":
     # Test cases: 1 Normal transaction and 1 Obvious Fraud transaction
     sample_normal = {

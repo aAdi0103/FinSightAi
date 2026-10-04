@@ -1,15 +1,3 @@
-"""
-rag/indexer.py
-==============
-Vector Indexer for the Regulatory & Historical Fraud Knowledge Base.
-
-Ingests regulatory guidelines (RBI, FATF, FinCEN) and historical bank
-investigation cases, computes vector embeddings, and creates a fast,
-offline-capable semantic retriever index.
-
-Author: AI-Assisted Financial Transaction Risk Investigation System
-"""
-
 import json
 import logging
 import os
@@ -20,9 +8,6 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# ---------------------------------------------------------------------------
-# CONFIGURATION
-# ---------------------------------------------------------------------------
 
 KNOWLEDGE_BASE_DIR = os.getenv("KNOWLEDGE_BASE_DIR", "knowledge_base")
 MODELS_DIR = os.getenv("MODELS_DIR", "models")
@@ -38,20 +23,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
-# 1. KNOWLEDGE INGESTION & DOCUMENT STRUCTURING
-# ---------------------------------------------------------------------------
-
 def load_and_prepare_documents(kb_dir: str = KNOWLEDGE_BASE_DIR) -> List[Dict[str, Any]]:
-    """
-    Read regulatory and historical case JSON files and prepare searchable document units.
-
-    Args:
-        kb_dir: Directory containing knowledge base JSON files.
-
-    Returns:
-        List of formatted document dictionaries ready for vector embedding.
-    """
+    
     documents: List[Dict[str, Any]] = []
 
     # 1. RBI Regulations
@@ -152,21 +125,11 @@ def load_and_prepare_documents(kb_dir: str = KNOWLEDGE_BASE_DIR) -> List[Dict[st
     return documents
 
 
-# ---------------------------------------------------------------------------
-# 2. VECTOR INDEX CONSTRUCTION
-# ---------------------------------------------------------------------------
-
 def build_vector_index(
     documents: List[Dict[str, Any]],
     models_dir: str = MODELS_DIR,
 ) -> None:
-    """
-    Compute domain vector embeddings and persist index and docstore.
-
-    Args:
-        documents: List of prepared document dictionaries.
-        models_dir: Target directory for index files.
-    """
+    
     os.makedirs(models_dir, exist_ok=True)
 
     texts = [doc["searchable_text"] for doc in documents]

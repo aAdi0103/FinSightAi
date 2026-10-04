@@ -1,12 +1,3 @@
-"""
-api/routes/investigate.py
-=========================
-FastAPI route handlers for transaction prediction, deep investigation,
-and batch CSV upload.
-
-Author: AI-Assisted Financial Transaction Risk Investigation System
-"""
-
 import logging
 from typing import Any, Dict, List
 
@@ -16,6 +7,7 @@ from api.schemas import (
     InvestigationResponse,
     SingleTransactionInput,
 )
+
 from ml.inference import predict_transaction
 from rag.investigator import investigate_transaction
 
@@ -26,10 +18,7 @@ router = APIRouter(prefix="/api/v1", tags=["Investigation & Scoring"])
 import datetime
 
 def resolve_step_and_timestamp(txn_dict: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Convert user-friendly transaction date/time into simulation step & temporal attributes
-    while preserving original timestamp for report generation.
-    """
+    
     ts_val = txn_dict.get("timestamp")
     step_val = txn_dict.get("step")
 
@@ -55,9 +44,7 @@ def resolve_step_and_timestamp(txn_dict: Dict[str, Any]) -> Dict[str, Any]:
     return txn_dict
 
 
-# ---------------------------------------------------------------------------
-# 1. SINGLE TRANSACTION INVESTIGATION
-# ---------------------------------------------------------------------------
+# SINGLE TRANSACTION INVESTIGATION
 
 @router.post(
     "/investigate",
@@ -76,9 +63,7 @@ async def investigate_single_transaction(payload: SingleTransactionInput):
         raise HTTPException(status_code=500, detail=f"Investigation failed: {str(e)}")
 
 
-# ---------------------------------------------------------------------------
-# 2. QUICK ML ANOMALY SCORING
-# ---------------------------------------------------------------------------
+# QUICK ML ANOMALY SCORING
 
 @router.post(
     "/predict",

@@ -1,14 +1,3 @@
-"""
-api/main.py
-===========
-Main FastAPI application for the AI-Assisted Financial Transaction Risk
-Investigation System.
-
-Provides RESTful endpoints and serves the interactive modern web application.
-
-Author: AI-Assisted Financial Transaction Risk Investigation System
-"""
-
 import logging
 import os
 from fastapi import FastAPI
@@ -74,7 +63,7 @@ app.include_router(knowledge_router)
 # SYSTEM HEALTH & ROOT UI
 # ---------------------------------------------------------------------------
 
-@app.get("/health", tags=["System Health"])
+@app.api_route("/health", methods=["GET", "HEAD"], tags=["System Health"])
 def health_check():
     """System health check and model status verification."""
     models_dir = os.getenv("MODELS_DIR", "models")

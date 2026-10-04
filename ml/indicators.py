@@ -1,39 +1,21 @@
-"""
-ml/indicators.py
-================
-Business-friendly Risk Indicator Extractor.
-
-Translates mathematical transaction features and anomaly scores into
-clear, human-readable risk indicators and generates semantic search
-queries for the RAG evidence retrieval pipeline.
-
-Author: AI-Assisted Financial Transaction Risk Investigation System
-"""
-
 from typing import Any, Dict, List, Tuple
 
+# this method analyzes the transaction data and extracts the risk indicators
+# it returns the risk level (LOW, MEDIUM, HIGH, or CRITICAL)
+# risk_level - This tells us how dangerous the transaction is.
+# severity_score - A numerical score from 0 to 100 showing how severe the risk is. Higher is riskier.
+# is_suspicious - A simple True or False flag indicating if the transaction is flagged as suspicious.
+# anomaly_score - A continuous anomaly score from Isolation Forest.
+# indicators - List of triggered risk strings.
+# search_query - Synthesized query string for RAG retrieval.
+# summary_attributes - Key quantitative signals extracted.
 
 def extract_risk_indicators(
     transaction: Dict[str, Any],
     anomaly_score: float = 0.0,
     is_suspicious: bool = False,
 ) -> Dict[str, Any]:
-    """
-    Analyze a transaction and extract plain-English business risk indicators.
 
-    Args:
-        transaction: Raw or processed transaction dictionary.
-        anomaly_score: Continuous anomaly score from Isolation Forest.
-        is_suspicious: Binary prediction flag.
-
-    Returns:
-        Dictionary containing:
-          - indicators: List of triggered risk strings.
-          - severity_score: Normalized risk score (0 - 100).
-          - risk_level: LOW, MEDIUM, HIGH, or CRITICAL.
-          - search_query: Synthesized query string for RAG retrieval.
-          - summary_attributes: Key quantitative signals extracted.
-    """
     txn_type = str(transaction.get("type", "UNKNOWN")).upper()
     amount = float(transaction.get("amount", 0.0))
     old_orig = float(transaction.get("oldbalanceOrg", 0.0))
@@ -137,7 +119,11 @@ def extract_risk_indicators(
     else:
         risk_level = "LOW"
 
-    # Synthesize semantic search query for RAG
+
+    # this section creates a search query for RAG (Retrieval-Augmented Generation)
+    # it is used to search for similar transactions in the knowledge base
+    # and retrieve relevant information to help with the investigation.
+
     query_parts = []
     if old_orig > 0 and new_orig == 0:
         query_parts.append("rapid account draining to zero balance")
