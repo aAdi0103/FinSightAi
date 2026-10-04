@@ -82,7 +82,7 @@ def health_check():
     }
 
 
-@app.get("/", tags=["UI Portal"])
+@app.api_route("/", methods=["GET", "HEAD"], tags=["UI Portal"])
 def serve_dashboard():
     """Serve the interactive web frontend."""
     index_path = os.path.join(STATIC_DIR, "index.html")
